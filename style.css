@@ -392,12 +392,14 @@ article .icon {
 .contact-info-upper-container {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap; /* Ensures items wrap properly */
   border-radius: 2rem;
   border: rgb(53, 53, 53) 0.1rem solid;
   border-color: rgb(163, 163, 163);
-  background: (250, 250, 250);
+  background: rgb(250, 250, 250); /* Fixed incorrect background syntax */
   margin: 2rem auto;
   padding: 0.5rem;
+  gap: 1rem; /* Added spacing between items */
 }
 
 .contact-info-container {
@@ -408,16 +410,18 @@ article .icon {
   margin: 1rem;
 }
 
-.contact-info-container p {
-  font-size: larger;
-}
+/* Responsive Fix for Small Screens */
+@media (max-width: 480px) {
+  .contact-info-upper-container {
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+  }
 
-.contact-icon {
-  cursor: default;
-}
-
-.email-icon {
-  height: 2.5rem;
+  .contact-info-container {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* FOOTER SECTION */
