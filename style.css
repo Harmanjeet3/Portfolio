@@ -372,7 +372,11 @@ article .icon {
   width: 90%;
   height: 90%;
 }
-
+.certification-img {
+  
+  width: 90%;
+  height: 90%;
+}
 .project-title {
   margin: 1rem;
   color: black;
