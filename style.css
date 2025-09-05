@@ -1,3 +1,47 @@
+/* CHATBOT SECTION */
+body { font-family: Arial, sans-serif; }
+.main-content {
+  margin-right: 540px; /* Leave space for the chatbox */
+  padding: 40px;
+}
+
+.chatbot-section {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 350px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000;
+  padding: 16px 12px 12px 12px;
+}
+.chatbot-section h1 {
+  color: #2c3e50;
+  font-size: 1.2rem;
+  margin: 0 0 10px 0;
+  text-align: center;
+}
+#chatbox {
+  width: 320px;
+  height: 120px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  overflow-y: auto;
+  background: #f9f9f9;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+.user { color: #2c3e50; margin: 8px 0; }
+.bot { color: #2980b9; margin: 8px 0; }
+#inputArea { display: flex; gap: 10px; width: 320px; }
+#message { flex: 1; padding: 8px; border-radius: 6px; border: 1px solid #ccc; }
+button { padding: 8px 16px; border-radius: 6px; border: none; background: #2980b9; color: #fff; cursor: pointer; }
+button:hover { background: #1c5a8a; }
 /* GENERAL */
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
@@ -229,31 +273,27 @@ section {
   border-radius: 2rem;
 }
 
-.btn-color-1,
-.btn-color-2 {
+
+.btn-color-1 {
   border: rgb(53, 53, 53) 0.1rem solid;
-}
-
-.btn-color-1:hover,
-.btn-color-2:hover {
-  cursor: pointer;
-}
-
-.btn-color-1,
-.btn-color-2:hover {
   background: rgb(53, 53, 53);
   color: white;
 }
-
 .btn-color-1:hover {
   background: rgb(0, 0, 0);
+  color: white;
 }
 
+
 .btn-color-2 {
-  background: none;
+  
+  background: #2980b9;
+  color: white;
 }
 
 .btn-color-2:hover {
+  background: #1c5a8a;
+  color: white;
   border: rgb(255, 255, 255) 0.1rem solid;
 }
 

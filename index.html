@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Portfolio</title>
+    <title>Harmanjeet Singh</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="mediaqueries.css" />
   </head>
-  <body>
+   <body>
     <nav id="desktop-nav">
       <div class="logo">Harman</div>
       <div>
@@ -65,7 +65,7 @@
             src="./assets/linkedin.png"
             alt="My LinkedIn profile"
             class="icon"
-            onclick="location.href='https://linkedin.com/in/harmanjeet-singh-pmp-3501791b7'"
+            onclick="location.href='https://linkedin.com/in/harmanjeet-singh-pmp-istqb-3501791b7'"
           />
           <img
             src="./assets/github.png"
@@ -653,7 +653,7 @@
             alt="LinkedIn icon"
             class="icon contact-icon"
           />
-          <p><a href="https://linkedin.com/in/harmanjeet-singh-pmp-3501791b7">LinkedIn</a></p>
+          <p><a href="https://linkedin.com/in/harmanjeet-singh-pmp-istqb-3501791b7">LinkedIn</a></p>
         </div>
         <div class="contact-info-container">
             <img
@@ -681,5 +681,50 @@
      <p>ਨਿਰਭਉ ਨਿਰਵੈਰ</p>
     </footer>
     <script src="script.js"></script>
+
+    </div>
+    <div class="chatbot-section">
+        <h1>Welcome! I’m your Portfolio Guide.</h1>
+        <div id="chatbox"></div>
+        <div id="inputArea">
+            <input type="text" id="message" placeholder="Type your message..." autocomplete="off">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    <script>
+        const chatbox = document.getElementById('chatbox');
+        const messageInput = document.getElementById('message');
+
+    function appendMessage(sender, text) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = sender;
+      msgDiv.textContent = (sender === 'user' ? 'You: ' : 'Assistant: ') + text;
+      chatbox.appendChild(msgDiv);
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
+
+        async function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message) return;
+            appendMessage('user', message);
+            messageInput.value = '';
+            try {
+              const res = await fetch('https://portfoliowithchatbot.onrender.com/ask',  {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message })
+                });
+                const data = await res.json();
+                appendMessage('bot', data.response);
+            } catch (err) {
+                appendMessage('bot', 'Error: Could not connect to API.');
+            }
+        }
+
+        // Allow pressing Enter to send message
+        messageInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') sendMessage();
+        });
+    </script>
   </body>
 </html>
