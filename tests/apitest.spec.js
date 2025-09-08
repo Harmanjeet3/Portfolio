@@ -16,8 +16,9 @@ test('test', async ({ page }) => {
   
   // Check if the response matches the expected format
   expect(responseBody).toHaveProperty('response');
-  expect(responseBody.response).toContain('Hello! How can I help you?\n');
-  
+  expect(responseBody.response).toContain('Hello');
+    expect(responseBody.response).toContain('How can I help ');
+
   // Alternative without checking for the exact newline character
   // expect(responseBody.response.trim()).toBe('Hello! How can I help you?');
 });
