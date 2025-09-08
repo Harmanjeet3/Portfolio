@@ -1,26 +1,10 @@
 name: Playwright Tests
 on:
+  workflow_dispatch:  # Allow manual triggering
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
-  # Enable manual trigger from Actions tab
-  workflow_dispatch:
-    inputs:
-      browser:
-        description: 'Browser to run tests on'
-        required: true
-        default: 'chromium'
-        type: choice
-        options:
-          - chromium
-          - firefox
-          - webkit
-      debug:
-        description: 'Run tests in debug mode'
-        required: false
-        type: boolean
-        default: false
 jobs:
   test:
     timeout-minutes: 60
@@ -35,35 +19,10 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: |
-        if ${{ github.event_name == 'workflow_dispatch' }}; then
-          # Use the browser selected in the manual trigger
-          BROWSER="${{ github.event.inputs.browser }}"
-          DEBUG_FLAG=""
-          if ${{ github.event.inputs.debug == 'true' }}; then
-            DEBUG_FLAG="--debug"
-          fi
-          npx playwright test --project="$BROWSER" $DEBUG_FLAG
-        else
-          # Default behavior for automatic triggers
-          npx playwright test
-        fi
-    - name: Prepare HTML report directory
-      if: always()
-      run: |
-        mkdir -p public/test-reports
-        cp -r playwright-report/* public/test-reports/ || true
+      run: npx playwright test --project="Chromium"
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
-    - name: Deploy test reports to GitHub Pages
-      if: always() && github.ref == 'refs/heads/main'
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./public
-        keep_files: true
-        destination_dir: test-reports
